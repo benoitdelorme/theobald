@@ -2,8 +2,9 @@ const http = require("http"),
     express = require("express"),
     app = express(),
     socketIo = require("socket.io");
+const PORT = process.env.PORT || 5000
 
-const server = http.Server(app).listen(5000);
+const server = http.Server(app).listen(PORT);
 const io = socketIo(server);
 const clients = {};
 
