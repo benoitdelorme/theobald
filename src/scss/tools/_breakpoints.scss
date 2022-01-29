@@ -1,0 +1,34 @@
+// ==========================================================================
+// Tools / Media Queries
+// ==========================================================================
+
+
+@mixin sm {
+	@media (max-width: $mq-sm) {
+		@content;
+	}
+}
+
+@mixin md {
+	@media (min-width: $mq-md) {
+		@content;
+	}
+}
+
+@mixin lg {
+	@media (min-width: $mq-lg) {
+		@content;
+	}
+}
+
+@mixin xl {
+	@media (min-width: $mq-xl) {
+		@content;
+	}
+}
+
+@mixin xxl {
+	@media (min-width: $mq-xxl) {
+		@content;
+	}
+}

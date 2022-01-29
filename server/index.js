@@ -28,7 +28,7 @@ const removeClient = socket => {
 
 io.sockets.on("connection", socket => {
     let id = socket.id;
-
+    
     addClient(socket);
     
     socket.on("mousemove", data => {
