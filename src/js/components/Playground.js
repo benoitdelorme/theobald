@@ -18,8 +18,7 @@ class Playground {
 
         this.currentUser = document.querySelectorAll(".user")[0];
         this.currentUserLeeroy = this.currentUser.querySelector('.leeroy');
-        this.currentUser.style.borderRadius = `${Math.floor(Math.random() * 100)}% 60% 70% 30% / ${Math.floor(Math.random() * 100)}% 50% 60% 50%`;
-        console.log(`${Math.floor(Math.random() * 100)}% 60% 70% 30% / 40% 50% 60% 50%;`);
+        /* this.currentUser.style.borderRadius = `${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% / ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}%`; */
     }
 
     initEvents() {
@@ -62,7 +61,7 @@ class Playground {
         let letters = '0123456789ABCDEF';
         let color = '#';
 
-        for (var i = 0; i < 6; i++) {
+        for (let i = 0; i < 6; i++) {
           color += letters[Math.floor(Math.random() * 16)];
         }
 
@@ -72,7 +71,7 @@ class Playground {
 
     addClient(data) {
         this.users[data.id] = this.userContainer.appendChild(this.currentUser.cloneNode(true));
-        this.users[data.id].style.borderRadius = `${Math.floor(Math.random() * 100)}% 60% 70% 30% / 40% 50% 60% 50%`;
+        /* this.users[data.id].style.borderRadius = `${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% / ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}%`; */
         this.users[data.id].querySelectorAll('path').forEach((user) => {
             user.style.fill = this.getRandomColor();
         })

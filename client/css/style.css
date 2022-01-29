@@ -178,7 +178,7 @@ table {
   position: absolute;
   width: 110px;
   height: 110px;
-  /* border-radius: 50%; */
+  border-radius: 50%;
   box-shadow: 0 0 0 0 black;
   overflow: hidden;
   margin-left: -55px;
@@ -229,13 +229,13 @@ table {
   }
 }
 
-.rotating {
-  -webkit-animation: rotating 2s linear infinite;
-          animation: rotating 2s linear infinite;
+/* .rotating {
+    animation: rotating 2s linear infinite;
+    transform-origin: 50%;
 }
 
 .rotatinginverse {
-  -webkit-animation: rotatinginverse 2s linear infinite;
-          animation: rotatinginverse 2s linear infinite;
-}
+    transform-origin: 50%;
+    animation: rotatinginverse 2s linear infinite;
+} */
 
