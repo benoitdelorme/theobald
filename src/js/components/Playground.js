@@ -1,4 +1,5 @@
 import * as io from 'socket.io-client';
+import gsap from 'gsap';
 
 class Playground {
     constructor(el) {
@@ -15,11 +16,9 @@ class Playground {
         this.clients = {};
         this.users = {};
 
-        this.user = document.createElement("div");
         this.currentUser = document.querySelectorAll(".user")[0];
         this.currentUserLeeroy = this.currentUser.querySelector('.leeroy');
         /* this.currentUser.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`; */
-        this.user.setAttribute("class", "user");
     }
 
     initEvents() {
@@ -30,28 +29,23 @@ class Playground {
                 y: e.pageY
             });
 
-            this.currentUser.style.transform = `translate3d(${e.pageX}px, ${e.pageY}px, 0)`;
+/*             this.currentUser.style.transform = `translate3d(${e.pageX}px, ${e.pageY}px, 0)`;
             this.currentUserLeeroy.style.transform = `translate3d(-${e.pageX}px, -${e.pageY}px, 0)`;
-
-            /* this.currentUser.style.top = e.pageY + "px"; */
-
-            /* this.currentUser.style.left = e.pageX + "px";
-            this.currentUser.style.top = e.pageY + "px"; */
+ */
+            gsap.to(this.currentUser, 0.6, {x: e.pageX, y: e.pageY})
+            gsap.to(this.currentUserLeeroy, 0.6, {x: -e.pageX, y: -e.pageY})
         });
         
         this.socket.on("moving", (data) => {
-            console.log(this.clients)
             if (!this.clients.hasOwnProperty(data.id)) {
-                console.log(data.id)
                 this.addClient(data);
             }
 
-            /* this.users[data.id].style.left = data.x + "px";
-            this.users[data.id].style.top = data.y + "px";
- */
-            this.users[data.id].style.transform = `translate3d(${data.x}px, ${data.y}px, 0)`;
-            console.log(this.users[data.id])
-            this.users[data.id].querySelector('.leeroy').style.transform = `translate3d(-${data.x}px, -${data.y}px, 0)`;
+            gsap.to(this.users[data.id], 0.6, {x: data.x, y: data.y})
+            gsap.to(this.users[data.id].querySelector('.leeroy'), 0.6, {x: -data.x, y: -data.y})
+
+            /* this.users[data.id].style.transform = `translate3d(${data.x}px, ${data.y}px, 0)`;
+            this.users[data.id].querySelector('.leeroy').style.transform = `translate3d(-${data.x}px, -${data.y}px, 0)`; */
 
             this.clients[data.id] = data;
         });
@@ -72,7 +66,9 @@ class Playground {
     }
 
     init() {
-        
+        this.currentUserLeeroy.querySelectorAll('path').forEach((user) => {
+            user.style.fill = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+        })
     }
 }
 
