@@ -160,9 +160,6 @@ table {
   position: absolute;
   height: 100vh;
   width: 100vw;
-  /* top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0); */
 }
 
 .leeroy svg {
@@ -179,46 +176,66 @@ table {
 
 .users .user {
   position: absolute;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  /* transform: translate3d(-50%, -50%, 0) scale(1); */
-  /* margin-left: -50px;
-  margin-top: -50px; */
+  width: 110px;
+  height: 110px;
+  /* border-radius: 50%; */
   box-shadow: 0 0 0 0 black;
-  /* animation: pulse 2s infinite cubic-bezier(0.33, 1, 0.68, 1); */
   overflow: hidden;
+  margin-left: -55px;
+  margin-top: -55px;
 }
 
 .user svg path {
   fill: black;
 }
 
-@-webkit-keyframes pulse {
-  0% {
-    transform: translate3d(-100%, -100%, 0) scale(1.25);
+@-webkit-keyframes rotating {
+  from {
+    transform: rotate(0deg);
   }
 
-  50% {
-    transform: translate3d(-100%, -100%, 0) scale(1);
-  }
-
-  100% {
-    transform: translate3d(-100%, -100%, 0) scale(1.25);
+  to {
+    transform: rotate(360deg);
   }
 }
 
-@keyframes pulse {
-  0% {
-    transform: translate3d(-100%, -100%, 0) scale(1.25);
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
   }
 
-  50% {
-    transform: translate3d(-100%, -100%, 0) scale(1);
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotatinginverse {
+  from {
+    transform: rotate(0deg);
   }
 
-  100% {
-    transform: translate3d(-100%, -100%, 0) scale(1.25);
+  to {
+    transform: rotate(-360deg);
   }
+}
+
+@keyframes rotatinginverse {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 2s linear infinite;
+          animation: rotating 2s linear infinite;
+}
+
+.rotatinginverse {
+  -webkit-animation: rotatinginverse 2s linear infinite;
+          animation: rotatinginverse 2s linear infinite;
 }
 

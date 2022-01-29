@@ -18,7 +18,8 @@ class Playground {
 
         this.currentUser = document.querySelectorAll(".user")[0];
         this.currentUserLeeroy = this.currentUser.querySelector('.leeroy');
-        /* this.currentUser.style.backgroundColor = `#${Math.floor(Math.random()*16777215).toString(16)}`; */
+        this.currentUser.style.borderRadius = `${Math.floor(Math.random() * 100)}% 60% 70% 30% / ${Math.floor(Math.random() * 100)}% 50% 60% 50%`;
+        console.log(`${Math.floor(Math.random() * 100)}% 60% 70% 30% / 40% 50% 60% 50%;`);
     }
 
     initEvents() {
@@ -26,26 +27,25 @@ class Playground {
         this.root.addEventListener('mousemove', (e) => {
             this.socket.emit("mousemove", {
                 x: e.pageX,
-                y: e.pageY
+                y: e.pageY,
+                windowWidth: window.outerWidth,
+                windowHeight: window.outerHeight
             });
 
-/*             this.currentUser.style.transform = `translate3d(${e.pageX}px, ${e.pageY}px, 0)`;
-            this.currentUserLeeroy.style.transform = `translate3d(-${e.pageX}px, -${e.pageY}px, 0)`;
- */
-            gsap.to(this.currentUser, 0.6, {x: e.pageX, y: e.pageY})
-            gsap.to(this.currentUserLeeroy, 0.6, {x: -e.pageX, y: -e.pageY})
+            let calcX = e.pageX - 55;
+            let calcY = e.pageY - 55;
+
+            gsap.to(this.currentUser, 0.6, {x: e.pageX, y: e.pageY});
+            gsap.to(this.currentUserLeeroy, 0.6, {x: -calcX, y: -calcY});
         });
         
         this.socket.on("moving", (data) => {
             if (!this.clients.hasOwnProperty(data.id)) {
                 this.addClient(data);
             }
-
-            gsap.to(this.users[data.id], 0.6, {x: data.x, y: data.y})
-            gsap.to(this.users[data.id].querySelector('.leeroy'), 0.6, {x: -data.x, y: -data.y})
-
-            /* this.users[data.id].style.transform = `translate3d(${data.x}px, ${data.y}px, 0)`;
-            this.users[data.id].querySelector('.leeroy').style.transform = `translate3d(-${data.x}px, -${data.y}px, 0)`; */
+            
+            gsap.to(this.users[data.id], 0.6, {x: data.x, y: data.y});
+            gsap.to(this.users[data.id].querySelector('.leeroy'), 0.6, {x: -data.calcX, y: -data.calcY});
 
             this.clients[data.id] = data;
         });
@@ -58,16 +58,29 @@ class Playground {
         });
     }
 
+    getRandomColor() {
+        let letters = '0123456789ABCDEF';
+        let color = '#';
+
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+
+        return color;
+    }
+      
+
     addClient(data) {
         this.users[data.id] = this.userContainer.appendChild(this.currentUser.cloneNode(true));
+        this.users[data.id].style.borderRadius = `${Math.floor(Math.random() * 100)}% 60% 70% 30% / 40% 50% 60% 50%`;
         this.users[data.id].querySelectorAll('path').forEach((user) => {
-            user.style.fill = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            user.style.fill = this.getRandomColor();
         })
     }
 
     init() {
         this.currentUserLeeroy.querySelectorAll('path').forEach((user) => {
-            user.style.fill = `#${Math.floor(Math.random()*16777215).toString(16)}`;
+            user.style.fill = this.getRandomColor();
         })
     }
 }
