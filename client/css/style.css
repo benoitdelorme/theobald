@@ -231,3 +231,81 @@ table {
   fill: black;
 }
 
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  z-index: 2;
+  pointer-events: none;
+  mask: url(/images/loader-sprite2.png?80d928833df2ef8ede6c13b1b4f63e10);
+  -webkit-mask: url(/images/loader-sprite2.png?80d928833df2ef8ede6c13b1b4f63e10);
+  -webkit-mask-size: 2300% 100%;
+          mask-size: 2300% 100%;
+  -webkit-animation: mask-play 1.6s steps(22) forwards;
+          animation: mask-play 1.6s steps(22) forwards;
+  -webkit-animation-delay: 3s;
+          animation-delay: 3s;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.loader h1 {
+  font-family: Bold;
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  color: white;
+  letter-spacing: 0.1em;
+  -webkit-animation: opacity 4s linear forwards;
+          animation: opacity 4s linear forwards;
+  margin-right: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+@-webkit-keyframes opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes opacity {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes mask-play {
+  from {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+
+@keyframes mask-play {
+  from {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+
+  to {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+

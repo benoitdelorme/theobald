@@ -1,8 +1,10 @@
 import { Config } from './utils/config';
 import Playground from './components/Playground';
+import Loader from './components/Loader';
 
 const components = {
-	'playground' : Playground
+	'playground' : Playground,
+	'loader' : Loader,
 };
 
 class Components {

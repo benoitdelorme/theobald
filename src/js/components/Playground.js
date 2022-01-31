@@ -19,9 +19,6 @@ class Playground {
         this.clients = {}
         this.users = {}
         this.spotLightUsers = {}
-        /* this.spotLightMouseCoordinateX = {}
-        this.spotLightMouseCoordinateY = {} */
-
         this.spotLightMouseCoordinate = []
 
         //2D Scene

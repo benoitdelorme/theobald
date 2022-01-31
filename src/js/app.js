@@ -10,7 +10,7 @@ class App {
 				DEBUG: {
 					BREAKPOINT: false,
 					LOG: LOG,
-					STATS: true
+					STATS: false
 				}
 			}
         ); 

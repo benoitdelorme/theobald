@@ -1,0 +1,49 @@
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    z-index: 2;
+    pointer-events: none;
+    mask: url(../../images/loader-sprite2.png);
+    -webkit-mask: url(../../images/loader-sprite2.png);
+    mask-size: 2300% 100%;
+    animation: mask-play 1.6s steps(22) forwards;
+    animation-delay: 3s;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    h1 {
+        font-family: Bold;
+        text-transform: uppercase;
+        font-size: rem(20px);
+        color: white;
+        letter-spacing: 0.1em;
+        animation: opacity 4s linear forwards;
+        margin-right: rem(20px);
+        margin-bottom: rem(20px);
+    }
+}
+
+@keyframes opacity {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mask-play {
+    from {
+        -webkit-mask-position: 0% 0;
+                mask-position: 0% 0;
+    }
+    to {
+        -webkit-mask-position: 100% 0;
+                mask-position: 100% 0;
+    }
+}
