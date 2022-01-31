@@ -100,20 +100,10 @@ class Playground {
         const texture = loader.load('./images/texture.jpeg')
         const alpha = loader.load('./images/alpha.png')
 
-        // Debug
-        const gui = new dat.GUI()
-
-        // Canvas
         const canvas = document.querySelector('canvas.webgl')
-
-        // Scene
         const scene = new THREE.Scene()
-
-        // Objects
         const geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64)
 
-
-        // Materials
         const material = new THREE.MeshStandardMaterial({
             color: 'grey',
             map: texture,
@@ -137,9 +127,6 @@ class Playground {
 
         const spotLight = new THREE.SpotLight( 0xff9000, 9, 1.5, Math.PI * 0.04, 0.25, 0 );
         spotLight.position.set( 0, 1.5, 0 );
-        spotLight.target.position.x = 0
-        spotLight.target.position.y = 0
-        spotLight.target.position.z = 0
 
         scene.add(spotLight);
         scene.add(spotLight.target);
@@ -148,14 +135,14 @@ class Playground {
         /* scene.add( spotLightHelper ); */
 
         const sizes = {
-            width: window.innerWidth/2,
-            height: window.innerHeight
+            width: window.innerWidth/2-50,
+            height: window.innerHeight+100
         }
 
         window.addEventListener('resize', () =>
         {
-            sizes.width = window.innerWidth/2
-            sizes.height = window.innerHeight
+            sizes.width = window.innerWidth/2-50
+            sizes.height = window.innerHeight+100
 
             camera.aspect = sizes.width / sizes.height
             camera.updateProjectionMatrix()
@@ -170,25 +157,17 @@ class Playground {
         camera.position.z = 3
         scene.add(camera)
 
-        // Controls
         const controls = new OrbitControls(camera, canvas)
         controls.enableDamping = true
 
-        /**
-         * Renderer
-         */
         const renderer = new THREE.WebGLRenderer({
             canvas: canvas
         })
         renderer.setSize(sizes.width, sizes.height)
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-        /**
-         * Animate
-         */
 
         const clock = new THREE.Clock()
-
         document.addEventListener('mousemove', animateMouse)
 
         let mouseY = 0;
@@ -197,8 +176,8 @@ class Playground {
         let percentX = 0;
 
         function animateMouse(e) {
-            mouseY = e.clientY-50;
-            mouseX = e.clientX-50;
+            mouseY = e.clientY;
+            mouseX = e.clientX;
             
             percentY = (mouseY/sizes.height - 0.5) * 2.5
             percentX = (mouseX/sizes.width - 0.5) * 2.5
@@ -212,6 +191,7 @@ class Playground {
 
             spotLight.target.position.z = percentY;
             spotLight.target.position.x = percentX;
+
             renderer.render(scene, camera)
             window.requestAnimationFrame(tick)
         }
