@@ -1,5 +1,8 @@
 import * as io from 'socket.io-client';
 import gsap from 'gsap';
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import * as dat from 'dat.gui'
 
 class Playground {
     constructor(el) {
@@ -7,17 +10,18 @@ class Playground {
         this.initCache();
         this.init();
         this.initEvents();
+        this.initWebgl();
     }
 
     initCache() {
         this.url = window.location.origin;
         this.socket = io.connect(this.url);
         this.userContainer = this.root.querySelector(".users");
-        this.clients = {};
-        this.users = {};
-
+        this.descriptionSpans = this.userContainer.querySelectorAll('span')
         this.currentUser = document.querySelectorAll(".user")[0];
         this.currentUserLeeroy = this.currentUser.querySelector('.leeroy');
+        this.clients = {};
+        this.users = {};
         /* this.currentUser.style.borderRadius = `${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% / ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}%`; */
     }
 
@@ -67,13 +71,16 @@ class Playground {
 
         return color;
     }
-      
-
+    
     addClient(data) {
         this.users[data.id] = this.userContainer.appendChild(this.currentUser.cloneNode(true));
         /* this.users[data.id].style.borderRadius = `${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% / ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}% ${Math.floor(Math.random() * 100)}%`; */
         this.users[data.id].querySelectorAll('path').forEach((user) => {
             user.style.fill = this.getRandomColor();
+        })
+
+        this.users[data.id].querySelectorAll('span').forEach((span) => {
+            span.style.color = this.getRandomColor();
         })
     }
 
@@ -81,6 +88,135 @@ class Playground {
         this.currentUserLeeroy.querySelectorAll('path').forEach((user) => {
             user.style.fill = this.getRandomColor();
         })
+
+        this.descriptionSpans.forEach((span) => {
+            span.style.color = this.getRandomColor();
+        })
+    }
+
+    initWebgl() {
+        const loader = new THREE.TextureLoader()
+        const height = loader.load('./images/cloud.jpg')
+        const texture = loader.load('./images/texture.jpeg')
+        const alpha = loader.load('./images/alpha.png')
+
+        // Debug
+        const gui = new dat.GUI()
+
+        // Canvas
+        const canvas = document.querySelector('canvas.webgl')
+
+        // Scene
+        const scene = new THREE.Scene()
+
+        // Objects
+        const geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64)
+
+
+        // Materials
+        const material = new THREE.MeshStandardMaterial({
+            color: 'grey',
+            map: texture,
+            displacementMap: height,
+            alphaMap: alpha,
+            transparent: true,
+            depthTest: false
+        })
+
+        const plane = new THREE.Mesh(geometry, material)
+        scene.add(plane);
+
+        plane.rotation.x = 181
+
+        const pointLight = new THREE.PointLight("#00b3ff", 2)
+        pointLight.position.x = 0.2
+        pointLight.position.y = 10
+        pointLight.position.z = 4.4
+
+        scene.add(pointLight)
+
+        const spotLight = new THREE.SpotLight( 0xff9000, 9, 1.5, Math.PI * 0.04, 0.25, 0 );
+        spotLight.position.set( 0, 1.5, 0 );
+        spotLight.target.position.x = 0
+        spotLight.target.position.y = 0
+        spotLight.target.position.z = 0
+
+        scene.add(spotLight);
+        scene.add(spotLight.target);
+
+        const spotLightHelper = new THREE.SpotLightHelper( spotLight );
+        /* scene.add( spotLightHelper ); */
+
+        const sizes = {
+            width: window.innerWidth/2,
+            height: window.innerHeight
+        }
+
+        window.addEventListener('resize', () =>
+        {
+            sizes.width = window.innerWidth/2
+            sizes.height = window.innerHeight
+
+            camera.aspect = sizes.width / sizes.height
+            camera.updateProjectionMatrix()
+
+            renderer.setSize(sizes.width, sizes.height)
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+        })
+
+        const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
+        camera.position.x = 0
+        camera.position.y = 1
+        camera.position.z = 3
+        scene.add(camera)
+
+        // Controls
+        const controls = new OrbitControls(camera, canvas)
+        controls.enableDamping = true
+
+        /**
+         * Renderer
+         */
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas
+        })
+        renderer.setSize(sizes.width, sizes.height)
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+
+        /**
+         * Animate
+         */
+
+        const clock = new THREE.Clock()
+
+        document.addEventListener('mousemove', animateMouse)
+
+        let mouseY = 0;
+        let mouseX = 0;
+        let percentY = 0;
+        let percentX = 0;
+
+        function animateMouse(e) {
+            mouseY = e.clientY-50;
+            mouseX = e.clientX-50;
+            
+            percentY = (mouseY/sizes.height - 0.5) * 2.5
+            percentX = (mouseX/sizes.width - 0.5) * 2.5
+        }
+
+        const tick = () =>
+        {
+
+            const elapsedTime = clock.getElapsedTime()
+            plane.rotation.z = 0.3 * elapsedTime;
+
+            spotLight.target.position.z = percentY;
+            spotLight.target.position.x = percentX;
+            renderer.render(scene, camera)
+            window.requestAnimationFrame(tick)
+        }
+
+        tick()
     }
 }
 

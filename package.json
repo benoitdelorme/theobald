@@ -1,5 +1,5 @@
 {
-  "name": "real-time-mouse-cursor-tracking",
+  "name": "theobald",
   "version": "1.0.0",
   "description": "",
   "engines": {
@@ -14,11 +14,14 @@
   },
   "dependencies": {
     "core-js": "^3.7.0",
+    "dat.gui": "^0.7.7",
     "express": "4.16.4",
     "gsap": "^3.5.1",
     "jquery": "^3.5.1",
     "nodemon": "1.18.4",
-    "socket.io": "^2.1.1"
+    "socket.io": "^2.1.1",
+    "split-text-js": "^1.0.3",
+    "three": "^0.137.5"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^6.3.1",

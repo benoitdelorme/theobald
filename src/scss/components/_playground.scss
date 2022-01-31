@@ -10,23 +10,41 @@
     height: 100vh;
     width: 100vw;
     overflow: hidden;
+    background-color: black;
+}
+
+.webgl {
+    position: absolute;
+    top: 0;
+    left: 45vw;
+    width: 55vw;
+    height: 100vh;
+    outline: none;
 }
 
 .leeroy {
     position: absolute;
     height: 100vh;
-    width: 100vw;
-
+    width: 45vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    
     svg {
-        position: absolute;
-        width: 100vw;
-        top: 50%;
-        left: 50%;
-        transform: translate3d(-50%, -50%, 0);
-
+        width: 80%;
+        
         path {
-            fill: black;
+            fill: white;
         }
+    }
+
+    p {
+        margin-left: 3.6vw;
+        font-family: Regular;
+        line-height: 1.7em;
+        color: grey;
+        width: 90%;
     }
 }
 
@@ -46,30 +64,3 @@
         fill: black;
     }
 }
-
-@keyframes rotating {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-@keyframes rotatinginverse {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(-360deg);
-    }
-}
-
-/* .rotating {
-    animation: rotating 2s linear infinite;
-    transform-origin: 50%;
-}
-
-.rotatinginverse {
-    transform-origin: 50%;
-    animation: rotatinginverse 2s linear infinite;
-} */

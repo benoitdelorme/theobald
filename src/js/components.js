@@ -8,15 +8,12 @@ const components = {
 class Components {
 
 	constructor(params) {
-        
 		if(params !== undefined) this.params = params;
 		this.$cache = {};
 		this.instances = [];
  
 		this.initCache();
-		this.init();  
-
-		
+		this.init();
 	}
 
 	initCache() {

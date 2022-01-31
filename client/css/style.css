@@ -132,6 +132,30 @@ table {
   border-spacing: 0;
 }
 
+@font-face {
+  font-family: "Bold";
+  src: url(/fonts/akkurat_bold-webfont.woff2?36869f1164e6c578b9e2d7dcdcdb4184) format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Light";
+  src: url(/fonts/akkurat_light_regular-webfont.woff2?f38ae24cb2ed0df5fc5bf0cb7790cbad) format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Regular";
+  src: url(/fonts/akkurat_regular-webfont.woff2?5455e1859215227a4bde31484be7e534) format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 .u-hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -154,24 +178,42 @@ table {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background-color: black;
+}
+
+.webgl {
+  position: absolute;
+  top: 0;
+  left: 45vw;
+  width: 55vw;
+  height: 100vh;
+  outline: none;
 }
 
 .leeroy {
   position: absolute;
   height: 100vh;
-  width: 100vw;
+  width: 45vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 .leeroy svg {
-  position: absolute;
-  width: 100vw;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  width: 80%;
 }
 
 .leeroy svg path {
-  fill: black;
+  fill: white;
+}
+
+.leeroy p {
+  margin-left: 3.6vw;
+  font-family: Regular;
+  line-height: 1.7em;
+  color: grey;
+  width: 90%;
 }
 
 .users .user {
@@ -188,54 +230,4 @@ table {
 .user svg path {
   fill: black;
 }
-
-@-webkit-keyframes rotating {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rotating {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes rotatinginverse {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes rotatinginverse {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-/* .rotating {
-    animation: rotating 2s linear infinite;
-    transform-origin: 50%;
-}
-
-.rotatinginverse {
-    transform-origin: 50%;
-    animation: rotatinginverse 2s linear infinite;
-} */
 
