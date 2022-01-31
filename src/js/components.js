@@ -33,10 +33,7 @@ class Components {
 
 			this.instances.push(obj);
         });
-
-        console.log(this.instances);
     }
-    
 
 	resize() {
 		$.each(this.instances, function() {

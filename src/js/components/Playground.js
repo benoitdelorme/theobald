@@ -47,7 +47,7 @@ class Playground {
 
         this.plane = new THREE.Mesh(this.geometry, this.material)
         this.pointLight = new THREE.PointLight("#00b3ff", 2)
-        this.spotLight = new THREE.SpotLight( 0xff9000, 9, 1.5, Math.PI * 0.04, 0.25, 0 );
+        this.spotLight = new THREE.SpotLight(this.getRandomColor(), 9, 1.5, Math.PI * 0.04, 0.25, 0 );
 
         this.sizes = {
             width: window.innerWidth/2,
