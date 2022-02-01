@@ -11,7 +11,6 @@ class Components {
 
 	constructor(params) {
 		if(params !== undefined) this.params = params;
-		this.$cache = {};
 		this.instances = [];
  
 		this.initCache();
@@ -34,14 +33,6 @@ class Components {
 			this.instances.push(obj);
         });
     }
-
-	resize() {
-		$.each(this.instances, function() {
-			let comp = this;
-			let cond = (typeof comp.resize === 'function');
-			if(cond) comp.resize();
-		});
-	}
 }
 
 export default Components;

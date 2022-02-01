@@ -33,7 +33,7 @@ class Playground {
         this.texture = this.loader.load('./images/texture.jpeg')
         this.alpha = this.loader.load('./images/alpha.png')
         this.canvas = this.root.querySelector('canvas.webgl')
-
+        
         this.scene = new THREE.Scene()
         this.geometry = new THREE.PlaneBufferGeometry(3, 3, 64, 64)
         this.material = new THREE.MeshStandardMaterial({
