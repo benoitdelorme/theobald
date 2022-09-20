@@ -1,8 +1,0 @@
-{
-  "name": "XP-THEOBALD",
-  "description": "Théobald masqué",
-  "repository": "https://github.com/benoitdelorme/xp-theobald",
-  "logo": "",
-  "keywords": ["node", "express", "heroku", "nodemon"],
-  "image": "heroku/nodejs"
-}

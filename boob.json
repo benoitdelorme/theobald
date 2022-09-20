@@ -1,0 +1,62 @@
+{
+    "node": {
+        "server": {
+            "port": "8008"
+        }
+    },
+    "debug": {
+        "breakpoints": true,
+        "verbose": true,
+        "seo": true,
+        "threejs": {
+            "gui": true,
+            "orbit": true
+        }
+    },
+    "paths": {
+        "src": "./src",
+        "dest": "./www",
+        "images": {
+            "src": "./src/images"
+        },
+        "styles": {
+            "src": "./src/styles",
+            "dest": "./www/assets/styles"
+        },
+        "scripts": {
+            "src": "./src/scripts",
+            "dest": "./www/assets/scripts"
+        },
+        "svgs": {
+            "src": "./src/images/sprite",
+            "dest": "./www/assets/images"
+        },
+        "views": {
+            "src": "./www/"
+        },
+        "client": "./www/index.html",
+        "server": "./"
+    },
+    "tasks": {
+        "styles": [
+            {
+                "infile": "{% paths.styles.src %}/style.scss",
+                "outfile": "{% paths.styles.dest %}/style.css"
+            }
+        ],
+        "scripts": [
+            {
+                "includes": [
+                    "{% paths.scripts.src %}/app.js"
+                ],
+                "outfile": "{% paths.scripts.dest %}/app.js"
+            }
+        ],
+        "purgeCSS": {
+            "content": [
+                "./www/**/*.html",
+                "./src/scripts/**/*"
+            ]
+        }
+    }
+}
